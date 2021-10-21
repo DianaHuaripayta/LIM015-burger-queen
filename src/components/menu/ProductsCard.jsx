@@ -1,6 +1,6 @@
 import './styleCards.css'
 import React from "react"
-/* import {SumProducts} from "./SumProducts.jsx"; */
+/* import { SumProducts } from './SumProducts'; */
 //AGREGAR CARTAS AL CONTENEDOR PADRE
 export function ProductsCard({ product,productMenu, card, setCard}) {
     const { id, name, price, img } = product; //product es cada obj que contiene
@@ -8,22 +8,32 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
     const addInList = () =>{
         const existProduct = card.find((products) => products.id === product.id)
         if (existProduct) {
-            console.log(existProduct, '¿EXISTE?(1)')
             setCard(//contiene todos los agregados
               card.map((products) =>
-                products.id === product.id ? { ...existProduct, 
+                products.id === product.id ? 
+                { ...existProduct, 
                   quantity: existProduct.quantity + 1 /* si ya existe quantity agrega 1 */
                 } : products)
-            );
-            console.log(card,'card SET CARD (2)')
-            
+            );          
           } else {
-            setCard([...card, { ...product, quantity: 1 }]);
-            console.log(product,'product con el obj (3)')
-            console.log(card,'no hay nada (4)')
-           
+            setCard([...card, { ...product, quantity: 1 }]);       
           }
-    }
+      }
+
+      const addInList2 = () =>{
+        const existProduct = card.find((products) => products.id === product.id)
+        if (existProduct) {
+            setCard(//contiene todos los agregados
+              card.map((products) =>
+                products.id === product.id ? 
+                { ...existProduct, 
+                  quantity: existProduct.quantity + 1 /* si ya existe quantity agrega 1 */
+                } : products)
+            );          
+          } else {
+            setCard([...card, { ...product, quantity: 1 }]);       
+          }
+      }
     
     return (
     <section className="container-cards">
@@ -35,9 +45,8 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
                     {productMenu ? ((<section>${price}</section>)): (<></>)}{/* Si el product menu ya esta, se agregara section pero sino se suma y solo se agrega un fragment */}
                     <h5 className="card-title designName">{name}</h5>
                     {productMenu ? ((
-                      <button className='btn btn-primary btn-block' onClick={()=>addInList(id)}>Agregar</button>
-                     /*  <div> <button onClick={SumProducts}> Say Hello</button></div> */
-                   
+                      <><button className='btn btn-primary btn-block' onClick={() => addInList(id)}>Agregar</button>
+                     {/*  <button className='btn btn-primary btn-block' onClick={() => addInList2(id)}>Agregar2</button> */}</>
                     ))
                     : (<></>)}
                 </div>
