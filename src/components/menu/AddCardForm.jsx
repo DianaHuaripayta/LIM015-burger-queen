@@ -1,5 +1,4 @@
 /* eslint-disable array-callback-return */
-import { ProductsCard } from "./ProductsCard.jsx"
 import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
 export function AddCardForm({ card, setCard }) {//cart y setCard con que contiene los cards que le dieron click
    
@@ -20,22 +19,14 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
                             {card.length === 0 ? (   
                                 <tr >
                                     <td>Agregar</td><td>Agregar</td><td>Agregar</td>
-                                </tr >
-                                 
-                                   
-                                ):
-                                (
-                                card.map((product) => (
-                               
-                               
+                                </tr >         
+                                ):(card.map((product) => (
                                     <tr>
                                         <td>{product.name} </td>
                                         <td>s/ {product.price}</td>
                                         <td><FaMinus color="#78c2ad" />{product.quantity}<FaPlus color="#78c2ad"/> <FaRegTrashAlt/>
                                         </td>
                                     </tr>
-                               
-                                
                                 ))
                             
                             )}  

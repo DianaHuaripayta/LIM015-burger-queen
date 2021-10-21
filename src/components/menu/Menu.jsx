@@ -42,8 +42,6 @@ export function Menu() {
   
   const [card, setCard] = useState([])//agregar tarjetas
     return (
-
-        <>
         <section className="containerMenu">
           {console.log(contentMenu, 'demo menu')}
           
@@ -75,12 +73,7 @@ export function Menu() {
             
             <section>
               <AddCardForm card={card} setCard={setCard}/>
-            {/* 'add tarjeta el table al menu' */}
             </section>
-            
-        
         </section>
-        
-        </>   
     )
 }
