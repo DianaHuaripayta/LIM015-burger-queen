@@ -19,22 +19,6 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
             setCard([...card, { ...product, quantity: 1 }]);       
           }
       }
-
-      const addInList2 = () =>{
-        const existProduct = card.find((products) => products.id === product.id)
-        if (existProduct) {
-            setCard(//contiene todos los agregados
-              card.map((products) =>
-                products.id === product.id ? 
-                { ...existProduct, 
-                  quantity: existProduct.quantity + 1 /* si ya existe quantity agrega 1 */
-                } : products)
-            );          
-          } else {
-            setCard([...card, { ...product, quantity: 1 }]);       
-          }
-      }
-    
     return (
     <section className="container-cards">
         <div className="slider">
