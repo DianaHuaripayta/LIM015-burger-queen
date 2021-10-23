@@ -1,20 +1,14 @@
-import React, {Component}  from "react";
-import ReactDOM from "react-dom";
-class SumProducts extends Component{
+import React from "react";
+export function SumProducts(id, product, card, setCard) {
     
-    clickHandler(){
-        console.log('clicked here')
-    }
-    render(){
-        return (
-        
-            <button className='btn btn-primary btn-block' onClick={this.clickHandler}>Agregar</button>
+    
+    return (
+        <div>
             
-        )
-    }
+        </div>
+    )
 }
-export default SumProducts;
-   
+
 
    
 
