@@ -14,7 +14,7 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
                 { ...existProduct, 
                   quantity: existProduct.quantity + 1 /* si ya existe quantity agrega 1 */
                 } : products)
-            );          
+                );          
           } else {
             setCard([...card, { ...product, quantity: 1 }]);       
           }
