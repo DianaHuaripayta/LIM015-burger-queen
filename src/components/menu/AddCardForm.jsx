@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
+import './table.css'
 export function AddCardForm({ card, setCard }) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 porque comienza a multiplicar de 0
     /* const arrayObjCard = card; */
@@ -53,9 +54,11 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
                             <td>{product.name} </td>
                             <td>s/ {product.price}</td>
                             <td>
-                            <FaMinus color="#78c2ad" onClick={() => fnResta(product.id)}/> {product.quantity}
-                            <FaPlus color="#78c2ad" onClick={() => fnSuma(product.id)}/>
-                            <FaRegTrashAlt onClick={()=> setCard(card.filter(item => item.id !== product.id))}/>
+                            <FaMinus style={{color: "#78c2ad", fontSize: '15px', margin:'6px'}}  onClick={() => fnResta(product.id)}/> {product.quantity}
+                            
+                            <FaPlus style={{color: "#78c2ad", fontSize: '15px', margin:'6px'}} onClick={() => fnSuma(product.id)}/>
+                            
+                            <FaRegTrashAlt style={{color: "#78c2ad", fontSize: '15px', margin:'6px' , cursor:'pointer'}} onClick={()=> setCard(card.filter(item => item.id !== product.id))}/>
                             </td>
                         </tr>
                     ))

@@ -26,11 +26,10 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
             <div className="card card-product" style={{ width: '10rem'}} >
                 <img src={img} alt="imagen" className="card-img-top"/>
                 <div className="card-body">
-                    {productMenu ? ((<section>${price}</section>)): (<></>)}{/* Si el product menu ya esta, se agregara section pero sino se suma y solo se agrega un fragment */}
+                    {productMenu ? ((<section>s/ {price}</section>)): (<></>)}{/* Si el product menu ya esta, se agregara section pero sino se suma y solo se agrega un fragment */}
                     <h5 className="card-title designName">{name}</h5>
                     {productMenu ? ((
-                      <><button className='btn btn-primary btn-block' onClick={() => addInList(id)}>Agregar</button>
-                     {/*  <button className='btn btn-primary btn-block' onClick={() => addInList2(id)}>Agregar2</button> */}</>
+                      <button className='btn btn-primary btn-block' onClick={() => addInList(id)}>Agregar</button>
                     ))
                     : (<></>)}
                 </div>
