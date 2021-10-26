@@ -3,6 +3,7 @@ import { db } from '../firebase/firebase-config';
 import { collection, getDocs } from "firebase/firestore";
 import { ProductsCard } from './ProductsCard.jsx';
 import {AddCardForm} from './AddCardForm.jsx'
+
 import './styleMenu.css'
 export function Menu() {
   // Declara una nueva variable de estado, que llamaremos "menu".
@@ -10,6 +11,9 @@ export function Menu() {
   // Declara una nueva variable de estado, que llamaremos "products".
   const [typeProduct, setProductType] = useState('breakfast')
 
+  /* state button */
+  const [buttonActive, setbuttonActive] = useState(false);
+  
   const getProductsFirebase = async () => {
     const arrayProduct = [];
     
@@ -64,8 +68,9 @@ export function Menu() {
             </section>
             
             <section>
-              <AddCardForm card={card} setCard={setCard}/>
+              <AddCardForm card={card} setCard={setCard} buttonActive={buttonActive} setbuttonActive={setbuttonActive}/>
             </section>
+            
         </section>
     )
 }
