@@ -3,7 +3,9 @@ import { db } from '../firebase/firebase-config';
 import { collection, getDocs } from "firebase/firestore";
 import { ProductsCard } from './ProductsCard.jsx';
 import {AddCardForm} from './AddCardForm.jsx'
-
+import { CustomerName } from './CustomerName';
+import {ButtonSend} from './ButtonSend.jsx'
+/* import { Summary } from './OrderSummary/Summary'; */
 import './styleMenu.css'
 export function Menu() {
   // Declara una nueva variable de estado, que llamaremos "menu".
@@ -42,6 +44,7 @@ export function Menu() {
   const [card, setCard] = useState([])
     return (
         <section className="containerMenu">
+            <CustomerName></CustomerName>
             <div className="btn-group barrasOption" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off" defaultChecked />
                 <label className="btn btn-outline-primary" htmlFor="btnradio1"  onClick={() => { setProductType('breakfast'); } }>Desayuno</label>
@@ -69,6 +72,9 @@ export function Menu() {
             <section>
               <AddCardForm card={card} setCard={setCard}/>
             </section>  
+            <section>
+              <ButtonSend></ButtonSend>
+            </section>
       </section>
     )
 }
