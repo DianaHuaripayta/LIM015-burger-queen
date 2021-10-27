@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
 import './table.css'
-export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//cart y setCard con que contiene los cards que le dieron click
+export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
     
     const fnResta = (id) => {
@@ -32,11 +32,9 @@ export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//
             }  
         })
     }
-    
-    const deleteProduct = (id) => {
-        setCard(card.filter(item => item.id !== id))
-        
-        setbuttonActive(true)
+    const deleteAllProducts = (e) =>{
+        e.preventDefault();
+        setCard([])
     }
     return (    
             <><div className="table-responsive">
@@ -46,7 +44,6 @@ export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//
                         <th scope="col">DESCRIPTION</th>
                         <th scope="col">TOTAL PARCIAL</th>
                         <th scope="col">CANT.</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -62,13 +59,10 @@ export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//
 
                                 <FaPlus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnSuma(product.id)} />
 
-                                <FaRegTrashAlt style={{ color: "#78c2ad", fontSize: '15px', margin: '6px', cursor: 'pointer' }}  disabled={buttonActive} onClick={() => deleteProduct(product.id)} />
+                                <FaRegTrashAlt style={{ color: "#78c2ad", fontSize: '15px', margin: '6px', cursor: 'pointer' }} onClick={() => setCard(card.filter(item => item.id !== product.id) )} />
                             </td>
                         </tr>
-
-
                     ))
-
                     )}
                 </tbody>
                 <tfoot className="table-active">
@@ -77,7 +71,7 @@ export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//
                             <strong>Total</strong>
                         </td>
                         <td>
-                            <strong>{total}.00</strong>
+                            <strong>{total}.00</strong> <FaRegTrashAlt onClick={deleteAllProducts}/>
                         </td>
 
                     </tr>
@@ -88,4 +82,3 @@ export function AddCardForm({ card, setCard, buttonActive, setbuttonActive}) {//
         </>                
     )
 };
-/* () => setCard(card.filter(item => item.id !== product.id)) */

@@ -7,6 +7,8 @@
 .containerBox{/* container-main-card */
     width: 100%;
     overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 15px;
 }
 .container-cards{
     background: #EBEBEB;
@@ -31,4 +33,9 @@
     width: 1000%;
     height: 100%;
     transition: all .5s;
+}
+
+/* barrasOption */
+.barrasOption{
+    width: 100%;
 }

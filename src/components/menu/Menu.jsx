@@ -12,7 +12,7 @@ export function Menu() {
   const [typeProduct, setProductType] = useState('breakfast')
 
   /* state button */
-  const [buttonActive, setbuttonActive] = useState(false);
+  /* const [buttonActive, setbuttonActive] = useState(false); */
   
   const getProductsFirebase = async () => {
     const arrayProduct = [];
@@ -39,10 +39,10 @@ export function Menu() {
     fetchList();
   }, [typeProduct])
   
-  const [card, setCard] = useState([])//agregar tarjetas
+  const [card, setCard] = useState([])
     return (
         <section className="containerMenu">
-            <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <div className="btn-group barrasOption" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off" defaultChecked />
                 <label className="btn btn-outline-primary" htmlFor="btnradio1"  onClick={() => { setProductType('breakfast'); } }>Desayuno</label>
                 <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"/>
@@ -55,7 +55,6 @@ export function Menu() {
                         <ProductsCard 
                           key={product.id}
                             product={product}
-                            /* -------------- */
                             card={card}/* obtener para agregar al form */
                             setCard={setCard}
                             productMenu={contentMenu}
@@ -68,9 +67,8 @@ export function Menu() {
             </section>
             
             <section>
-              <AddCardForm card={card} setCard={setCard} buttonActive={buttonActive} setbuttonActive={setbuttonActive}/>
-            </section>
-            
-        </section>
+              <AddCardForm card={card} setCard={setCard}/>
+            </section>  
+      </section>
     )
 }
