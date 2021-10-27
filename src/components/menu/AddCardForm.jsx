@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
+/* import { Summary } from "./OrderSummary/Summary"; */
 import './table.css'
 export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
@@ -78,6 +79,8 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
 
                 </tfoot>
             </table>
+
+           
         </div>
         </>                
     )
