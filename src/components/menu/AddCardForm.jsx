@@ -1,10 +1,36 @@
-/* eslint-disable array-callback-return */
-import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
-/* import { Summary } from "./OrderSummary/Summary"; */
-import './table.css'
+import React, { useRef } from 'react';
+import { FaPlus, FaMinus, FaRegTrashAlt, FaUser} from "react-icons/fa";
+import { collection, addDoc } from "firebase/firestore";
+import {db} from "../firebase/firebase-config"
 export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
-    
+    /* ------------------------------------------- */
+    const inputName = useRef();
+
+    const sendOrderProducts = async(e) =>{
+        e.preventDefault();
+        let order = {};
+        order.name= inputName.current.value;
+        order.products = card;
+        order.created_at = new Date();
+        order.status = "pending";
+        console.log(order); 
+        
+        try {
+            const docRef = await addDoc(collection(db, "orders"), {
+            name: inputName.current.value,
+            products: card,
+            created : new Date(),
+            status : "pending"
+            });
+        
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+
+    /* ------------------------------------------- */
     const fnResta = (id) => {
         card.map((product) => {
             if (product.id === id && product.quantity > 1) {
@@ -37,11 +63,20 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
         e.preventDefault();
         setCard([])
     }
-    return (    
-            <><div className="table-responsive">
+    return (   
+            <>
+            <div className="form-group">
+                <div className="form-group">
+                    <div className="input-group mb-3">
+                        <span className="input-group-text"><FaUser/></span>
+                        <input type="text" className="form-control" ref={inputName} />
+                    </div>
+                </div>
+            </div>
+            <div className="table-responsive">
             <table className="table table-borderless">
                 <thead className="table-active">
-                    <tr>{/* className="table-primary" */}
+                    <tr>
                         <th scope="col">DESCRIPTION</th>
                         <th scope="col">TOTAL PARCIAL</th>
                         <th scope="col">CANT.</th>
@@ -79,7 +114,7 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
 
                 </tfoot>
             </table>
-
+            <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button>
            
         </div>
         </>                
