@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import {Link} from "react-router-dom";
 import { FaPlus, FaMinus, FaRegTrashAlt, FaUser} from "react-icons/fa";
 import { collection, addDoc } from "firebase/firestore";
 import {db} from "../firebase/firebase-config"
@@ -116,8 +117,8 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
 
                     </tfoot>
                 </table>
-                <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button>
-
+               
+                <Link to={"/summary/"}> <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button></Link>
             </div></>
                        
     )
