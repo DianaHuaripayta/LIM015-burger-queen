@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import { FaPlus, FaMinus, FaRegTrashAlt, FaUser} from "react-icons/fa";
 import { collection, addDoc } from "firebase/firestore";
 import {db} from "../firebase/firebase-config"
-export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene los cards que le dieron click
+export function AddCardForm({ card, setCard }) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
     /* ------------------------------------------- */
+    
     const inputName = useRef();
-
     const sendOrderProducts = async(e) =>{
         e.preventDefault();
         let order = {};
@@ -18,7 +18,7 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
         
         try {
             const docRef = await addDoc(collection(db, "orders"), {
-            name: inputName.current.value,
+           /*  name: inputName.current.value, */
             products: card,
             created : new Date(),
             status : "pending"
@@ -32,6 +32,7 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
 
     /* ------------------------------------------- */
     const fnResta = (id) => {
+        // eslint-disable-next-line array-callback-return
         card.map((product) => {
             if (product.id === id && product.quantity > 1) {
                 
@@ -47,6 +48,7 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
         })
     }
     const fnSuma = (id) => {
+        // eslint-disable-next-line array-callback-return
         card.map((product) => {
             if (product.id === id) {
                 setCard(
@@ -73,50 +75,50 @@ export function AddCardForm({ card, setCard}) {//cart y setCard con que contiene
                     </div>
                 </div>
             </div>
-            <div className="table-responsive">
-            <table className="table table-borderless">
-                <thead className="table-active">
-                    <tr>
-                        <th scope="col">DESCRIPTION</th>
-                        <th scope="col">TOTAL PARCIAL</th>
-                        <th scope="col">CANT.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {card.length === 0 ? (<tr>
-                        <td>Agregar</td><td>Agregar</td><td>Agregar</td>
-                    </tr>
-                    ) : (card.map((product) => (
+        <div className="table-responsive">
+                <table className="table table-borderless">
+                    <thead className="table-active">
                         <tr>
-                            <td>{product.name} </td>
-                            <td>s/ {product.price}</td>
-                            <td>
-                                <FaMinus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnResta(product.id)} /> {product.quantity}
-
-                                <FaPlus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnSuma(product.id)} />
-
-                                <FaRegTrashAlt style={{ color: "#78c2ad", fontSize: '15px', margin: '6px', cursor: 'pointer' }} onClick={() => setCard(card.filter(item => item.id !== product.id) )} />
-                            </td>
+                            <th scope="col">DESCRIPTION</th>
+                            <th scope="col">TOTAL PARCIAL</th>
+                            <th scope="col">CANT.</th>
                         </tr>
-                    ))
-                    )}
-                </tbody>
-                <tfoot className="table-active">
-                    <tr>
-                        <td colSpan="2">
-                            <strong>Total</strong>
-                        </td>
-                        <td>
-                            <strong>{total}.00</strong> <FaRegTrashAlt onClick={deleteAllProducts}/>
-                        </td>
+                    </thead>
+                    <tbody>
+                        {card.length === 0 ? (<tr>
+                            <td>Agregar</td><td>Agregar</td><td>Agregar</td>
+                        </tr>
+                        ) : (card.map((product) => (
+                            <tr>
+                                <td>{product.name} </td>
+                                <td>s/ {product.price}</td>
+                                <td>
+                                    <FaMinus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnResta(product.id)} /> {product.quantity}
 
-                    </tr>
+                                    <FaPlus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnSuma(product.id)} />
 
-                </tfoot>
-            </table>
-            <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button>
-           
-        </div>
-        </>                
+                                    <FaRegTrashAlt style={{ color: "#78c2ad", fontSize: '15px', margin: '6px', cursor: 'pointer' }} onClick={() => setCard(card.filter(item => item.id !== product.id))} />
+                                </td>
+                            </tr>
+                        ))
+                        )}
+                    </tbody>
+                    <tfoot className="table-active">
+                        <tr>
+                            <td colSpan="2">
+                                <strong>Total</strong>
+                            </td>
+                            <td>
+                                <strong>{total}.00</strong> <FaRegTrashAlt onClick={deleteAllProducts} />
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+                </table>
+                <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button>
+
+            </div></>
+                       
     )
 };
