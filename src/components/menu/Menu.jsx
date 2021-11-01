@@ -40,9 +40,11 @@ export function Menu() {
   }, [typeProduct])
   
   const [card, setCard] = useState([])
+/*   const [name, setName] = useState(''); */
     return (
       
         <section className="containerMenu">
+          
             <div className="btn-group barrasOption" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off" defaultChecked />
                 <label className="btn btn-outline-primary" htmlFor="btnradio1"  onClick={() => { setProductType('breakfast'); } }>Desayuno</label>
@@ -53,7 +55,8 @@ export function Menu() {
                   <section className="container-cards">
                     <div className="slider">
                     {contentMenu.map((product) => (//contentMenu tiene el contenido INICIAL de las
-                        <ProductsCard  key={product.id} 
+                        <ProductsCard  
+                        key={product.id} 
                         product={product} 
                         card={card} 
                         setCard={setCard} 
