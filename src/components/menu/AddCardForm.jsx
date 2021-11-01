@@ -1,35 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useRef , useState} from 'react';
 import {Link} from "react-router-dom";
 import { FaPlus, FaMinus, FaRegTrashAlt, FaUser} from "react-icons/fa";
 import { collection, addDoc } from "firebase/firestore";
+import { ModalSummary } from './summary/ModalSummary';
 import {db} from "../firebase/firebase-config"
 export function AddCardForm({ card, setCard }) {//cart y setCard con que contiene los cards que le dieron click
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
-    /* ------------------------------------------- */
-    
     const inputName = useRef();
-    const sendOrderProducts = async(e) =>{
-        e.preventDefault();
+    
+    const addOrdersFirebase =async(e)=>{
+        e.preventDefault()
         let order = {};
-        order.name= inputName.current.value;
+        order.nameCustomer= inputName.current.value;
         order.products = card;
         order.created_at = new Date();
         order.status = "pending";
         console.log(order); 
         
-        try {
-            const docRef = await addDoc(collection(db, "orders"), {
-           /*  name: inputName.current.value, */
-            products: card,
-            created : new Date(),
-            status : "pending"
-            });
-        
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
+       
+        const docRef = await addDoc(collection(db, "orders"), {
+        nameCustomer: inputName.current.value,
+        products: card,
+        created : new Date(),
+        status : "pending"
+        });
+    
+        console.log("Document written with ID: ", docRef.id);
+    
     }
+    /* ---- */
 
     /* ------------------------------------------- */
     const fnResta = (id) => {
@@ -72,8 +71,8 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
                 <div className="form-group">
                     <div className="input-group mb-3">
                         <span className="input-group-text"><FaUser/></span>
-                        <input type="text" className="form-control" ref={inputName} />
-                    </div>
+                        <input type="text" className="form-control" ref={inputName}/>
+                    </div>  
                 </div>
             </div>
         <div className="table-responsive">
@@ -90,10 +89,10 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
                             <td>Agregar</td><td>Agregar</td><td>Agregar</td>
                         </tr>
                         ) : (card.map((product) => (
-                            <tr>
-                                <td>{product.name} </td>
-                                <td>s/ {product.price}</td>
-                                <td>
+                            <tr key={product.id}>
+                                <td> {product.name} </td>
+                                <td >s/ {product.price}</td>
+                                <td >
                                     <FaMinus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnResta(product.id)} /> {product.quantity}
 
                                     <FaPlus style={{ color: "#78c2ad", fontSize: '15px', margin: '6px' }} onClick={() => fnSuma(product.id)} />
@@ -118,7 +117,15 @@ export function AddCardForm({ card, setCard }) {//cart y setCard con que contien
                     </tfoot>
                 </table>
                
-                <Link to={"/summary/"}> <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button></Link>
+                {/* <button type="button" className="btn btn-primary btn-lg" onClick={sendOrderProducts}>Enviar compras</button> */}
+                {/* <ProductSummary onClick={addOrdersFirebase}></ProductSummary> */}
+
+                {/* Button trigger modal */}
+                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={addOrdersFirebase}>
+                Enviar Pedido 
+                </button>
+                <ModalSummary/>
+               
             </div></>
                        
     )

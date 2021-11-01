@@ -9,8 +9,8 @@ export function Login() {
             <p className="burgerQueen">BURGER QUEEN</p>
            </div>
            <div>
-           <Link to={"/menu/"}> <button type="button" class="btn btn-primary">Mesero</button></Link>
-            <button type="button" class="btn btn-primary">Jefe de cocina</button>
+           <Link to={"/menu"}> <button type="button" className="btn btn-primary">Mesero</button></Link>
+            <button type="button" className="btn btn-primary">Jefe de cocina</button>
            </div>
         </section>
     )
