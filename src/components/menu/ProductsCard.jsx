@@ -2,11 +2,9 @@ import './styleCards.css'
 import React from "react"
 import swal from 'sweetalert';
 //AGREGAR CARTAS AL CONTENEDOR PADRE
-export function ProductsCard({ product,productMenu, card, setCard}) {
+export function ProductsCard({ product, productMenu, card, setCard}) {
     const { id, name, price, img } = product; //product es cada obj que contiene
-    /* state button */
-    /* const [buttonActive, setbuttonActive] = useState(false); */
-    /* disabled={buttonActive}-- en el button */
+
     const addInList = () =>{
         const existProduct = card.find((products) => products.id === product.id)
         if (existProduct) {
@@ -25,9 +23,7 @@ export function ProductsCard({ product,productMenu, card, setCard}) {
               title: "Agregado",
               button:"Aceptar",
               timer:"2000"
-            });    
-            /* setbuttonActive(true) */
-                
+            });                   
           }
         
           

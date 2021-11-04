@@ -1,0 +1,8 @@
+.conatinerButton{
+    display: flex;
+    flex-direction: row;
+}
+.boxButtonMesero{
+    margin: 50px;
+    padding: 90%;
+}

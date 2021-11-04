@@ -39,3 +39,11 @@
 .barrasOption{
     width: 100%;
 }
+.containerButtonMenu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boxButton{
+    margin: 10px;
+}
