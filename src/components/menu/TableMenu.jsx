@@ -1,6 +1,5 @@
 import { FaPlus, FaMinus, FaRegTrashAlt} from "react-icons/fa";
-import { SuccessfulAlert } from "./SuccessfulAlert";
-import { ModalSummary } from "./summary/ModalSummary";
+
 export function TableMenu({card, setCard}) {
     const total = card.reduce((acc, item) => acc + item.quantity * item.price , 0)//item el elemento actual | 0 
     /* ------------------------------------------- */
@@ -82,7 +81,7 @@ export function TableMenu({card, setCard}) {
 
                     </tfoot>
                 </table>
-                <ModalSummary/>
+                
             </div>
         </div>
     )
