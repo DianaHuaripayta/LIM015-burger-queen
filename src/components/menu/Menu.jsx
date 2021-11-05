@@ -5,9 +5,8 @@ import { db } from '../firebase/firebase-config';
 import { collection, getDocs,addDoc } from "firebase/firestore";
 import { ProductsCard } from './ProductsCard.jsx';
 import { TableMenu } from './TableMenu';
-
+import swal from 'sweetalert';
 import './styleMenu.css'
-import { SuccessfulAlert } from './SuccessfulAlert';
 
 export function Menu() {
   // Declara una nueva variable de estado, que llamaremos "menu".
@@ -61,6 +60,12 @@ export function Menu() {
       
       });
       
+      swal({
+        title: "Good job!",
+        text: "You clicked the button!",
+        icon: "success",
+        button: "Aww yiss!",
+      });
       console.log("Document written with ID: ", docRef.id);
   }
   
@@ -101,7 +106,7 @@ export function Menu() {
             </section>  
             <section className="containerButtonMenu">
               <div className="boxButton">
-                  <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={addOrdersFirebase} >
+                  <button type="button" className="btn btn-primary" onClick={addOrdersFirebase} >
                       Enviar Pedido 
                   </button>
               </div>
